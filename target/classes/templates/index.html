@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlyFoxDICT</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <form action="/" method="post">
+        <div class="container">
+            <div class="logo-box">
+                <div class="title">
+                    <h1>&#x1F1F5;&#x1F1F1; SlyFox<div class="titile2">DICT!</div> &#x1F1E9;&#x1F1EA;</h1>
+                </div>
+                <h2>A polish-german dictionary</h2>
+            </div>
+            <form>
+                <div class="checkOptions">
+                    <p>Search in all sources</p>
+                    <div class="checkbox-wrapper-2">
+                        <input type="checkbox" name="sourcesButton" class="sc-gJwTLC ikxBAC" checked onclick="onClick(this)">
+                    </div>
+                </div>
+                <div class="inPut">
+                    <h3>Input a search here:</h3>
+                    <div class="inputFeld">
+                        <input type="text" name="inputText" onkeydown="preventEnter(event, inputText.value)">
+                        <div class="inputButton">
+                            <input type="button" name="inputButton" value="Submit" onclick="scrapeData(inputText.value)">
+                        </div>
+                    </div>
+                </div>
+                <div class="outPut">
+                    <div>
+                        <div class="header">
+                            <h3>Results from Diki.pl</h3>
+                            <div class="checkbox-wrapper-2">
+                                <input type="checkbox" id="dikiActivateButton" class="sc-gJwTLC ikxBAC" checked>
+                            </div>
+                        </div>
+                        <p id="dikiDOTpl" class="notificationText">. . .</p>
+                        <p id="dikiVerb"></p><!--! Not used-->
+                        <p id="dikiNoun"></p><!--! Not used-->
+                        <p id="dikiMeanings"></p><!--! Not used-->
+                    </div>
+                    <div>
+                        <div class="header">
+                            <h3>Results from Verbformen.com</h3>
+                            <div class="checkbox-wrapper-2">
+                                <input type="checkbox" id="verbFormenActivateButton" class="sc-gJwTLC ikxBAC" checked>
+                            </div>
+                        </div>
+                        <p id="verbFormenDOTnet" class="notificationText">. . .<br></p>
+                        <p id="verbPrepositions" class="notificationText">Empty.</p>
+                        <input type="button" id="verbformenFurtherButton" class="collapsible" value="Show further contents" onclick="showHiddenContents()">
+                        <div id="verbFromenContents" class="hiddenContent">
+                            <p id="engExplnanation" class="notificationText">English explanation</p>
+                            <hr>
+                            <p id="deuExplanation" class="notificationText">German explanation.</p>
+                            <hr>
+                            <p id="exampleSentences" class="notificationText">Example sentences:<br></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="header">
+                            <h3>Results from Linguee.com</h3>
+                            <div class="checkbox-wrapper-2">
+                                <input type="checkbox" id="lingueeActivateButton" class="sc-gJwTLC ikxBAC" checked>
+                            </div>
+                        </div>
+                        <p id="LingueeDOTcom" class="notificationText">. . . <br></p>
+                    </div>
+                    <div>
+                        <div class="header">
+                            <h3>Results from Context.reverso.net</h3>
+                            <div class="checkbox-wrapper-2">
+                                <input type="checkbox" id="reversoActivateButton" class="sc-gJwTLC ikxBAC" checked>
+                            </div>
+                        </div>
+                        <p id="reversoContext" class="notificationText">. . .</p>
+                    </div>
+                    <div>
+                        <div class="header">
+                            <h3>Results from Netzverb SatzApp</h3>
+                            <div class="checkbox-wrapper-2">
+                                <input type="checkbox" id="satzAppActivateButton" class="sc-gJwTLC ikxBAC" checked>
+                            </div>
+                        </div>
+                        <p id="satzApp" class="notificationText">. . .</p>
+                    </div>
+
+                    <!-- ! This is the place for the dictionary.cc -->
+                    <!-- ! TESTING -->
+                    <iframe src="https://syn.dict.cc/?s=" width="280" height="75" style="border:1px solid #ccc; background-color:white; padding:0 5px;"></iframe>
+                    <form action="//https://syn.dict.cc/" target="_blank"><input type="text" name="s"><input type="submit"></form>
+                    
+                    <div>
+                        <h3>Search word online:</h3>
+                        <div id="webLinks">
+                            <div class="webColumn">
+                                <h5>Dictionaries:</h5>
+                                <div>
+                                    <a href="http://" id="lingueeLink" class="webLink">Linguee Dictionary</a>
+                                </div>
+                                <div>
+                                    <a href="http://" id="dictCCLink" class="webLink">Dict.cc Dictionary</a>
+                                </div>
+                                <div>
+                                    <a href="http://" id="ReversoLink" class="webLink">Reverso Context</a>
+                                </div>
+                                <div>
+                                    <a href="http://" id="satzAppLink" class="webLink">Netzverb SatzApp</a>
+                                </div>
+                                <div>
+                                    <a href="http://" id="dwdsLink" class="webLink">DWDS</a>
+                                </div>
+                            </div>
+                            <div class="webColumn">
+                                <h5>Images:</h5>
+                                <div>
+                                    <a id="googleImageLink" class="webLink" href="http://" target="_blank">Google images</a>
+                                </div>
+                                <div>
+                                    <a href="http://" id="adobeStockLink" class="webLink">Adobe Stock</a>
+                                </div>
+                            </div>
+                            <div class="webColumn">
+                                <h5>Translators:</h5>
+                                <div>
+                                    <a id="deeplDeLink" class="webLink" cla href="http://" target="_blank">DeepL (EN/DE)</a>
+                                </div>
+                                <div> 
+                                    <a id="deeplPlLink" class="webLink" href="http://" target="_blank">DeepL (PL/DE)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script th:src="@{/js/scripts.js}"></script>
+    </form>
+</body>
+</html>
